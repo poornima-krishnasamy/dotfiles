@@ -20,8 +20,9 @@ export ZSH="/Users/pkrishnasamy/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
-#ZSH_THEME="agnoster"
+#ZSH_THEME="avit"
+ZSH_THEME="agnoster"
+#ZSH_THEME="bullet-train"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -81,13 +82,18 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git kubectl docker kops helm aws terraform ruby kube-ps1)
+plugins=(git kubectl docker kops helm terraform kube-ps1 zsh-autosuggestions history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 export EDITOR='vim'
 
-PROMPT=$PROMPT'$(kube_ps1) 
-'
+# PROMPT="%{$fg_bold[white]%}%n %{$fg[blue]%}"
+#PROMPT=" %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
+
+#PROMPT+=' %{$fg[cyan]%}%c%{$reset_color%} $(git_current_branch)'
+
+#PROMPT='%{$fg[yellow]%}[%D{%f/%m/%y} %D{%L:%M:%S}] '$PROMPT
+PROMPT=$PROMPT'$(kube_ps1)' 
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
@@ -95,6 +101,8 @@ eval "$(rbenv init -)"
 # Skip forward/back a word with opt-arrow
 bindkey '[C' forward-word
 bindkey '[D' backward-word
+bindkey "^[[A" history-search-backward
+bindkey "^[[B" history-search-forward
 
 # User configuration
 
@@ -158,7 +166,15 @@ alias reload=". ~/.zshrc"
 alias se='sudoedit'
 alias tf='terraform'
 # Alias to go to the workspace folder
-alias ws="cd ~/Documents/workarea"
-alias wsm="cd ~/Documents/workarea"
+alias wspk="cd /Users/pkrishnasamy/go/src/github.com/poornima-krishnasamy"
+alias wsmoj="cd /Users/pkrishnasamy/go/src/github.com/ministryofjustice"
 
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="/usr/local/opt/curl/bin:$PATH"
+export PATH="/usr/local/opt/curl-openssl/bin/:$PATH"
